@@ -1,5 +1,7 @@
 package com.firstexample.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,10 +13,12 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name= "car_chassis")
+    @JsonBackReference(value = "chassis_mov")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private CarChassis carChassis;
 
-    @Column(name= "motor")
+    @JsonBackReference(value = "car_mov")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Motor motor;
 
     @Column(name= "brand")

@@ -1,9 +1,13 @@
 package com.firstexample.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.firstexample.demo.model.enumeration.ChasissType;
 import com.firstexample.demo.model.enumeration.Color;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Entity
 @Table(name = "CARCHASSIS")
@@ -33,10 +37,14 @@ public class CarChassis {
     @Enumerated(EnumType.STRING)
     private Color color;
 
+    @JsonManagedReference(value = "chassis_mov")
+    @OneToMany(mappedBy = "carChassis", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Car> cars = new HashSet<Car>();
+
     public CarChassis() {
     }
 
-    public CarChassis(Long id, ChasissType chasissType, int length, int width, int height, int volume, Color color) {
+    public CarChassis(Long id, ChasissType chasissType, int length, int width, int height, int volume, Color color, Set<Car> cars) {
         this.id = id;
         this.chasissType = chasissType;
         this.length = length;
@@ -44,6 +52,7 @@ public class CarChassis {
         this.height = height;
         this.volume = volume;
         this.color = color;
+        this.cars = cars;
     }
 
     public Long getId() {
@@ -100,5 +109,13 @@ public class CarChassis {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public Set<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(Set<Car> cars) {
+        this.cars = cars;
     }
 }

@@ -1,8 +1,12 @@
 package com.firstexample.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.firstexample.demo.model.enumeration.CylinderType;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "MOTOR")
@@ -31,13 +35,18 @@ public class Motor {
     @Column(name = "cylinder_type")
     private CylinderType cylinderType;
 
-    @Column(name = "fuel_type")
+    @JsonManagedReference(value = "car_mov")
+    @OneToMany(mappedBy = "motor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Car> cars = new HashSet<Car>();
+
+    @JsonBackReference(value = "fuel_mov")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private FuelType fuelType;
 
     public Motor() {
     }
 
-    public Motor(Long id, String motorNumber, int motorPower, int hPower, int volume, int numberOfCylinders, CylinderType cylinderType, FuelType fuelType) {
+    public Motor(Long id, String motorNumber, int motorPower, int hPower, int volume, int numberOfCylinders, CylinderType cylinderType, FuelType fuelType, Set<Car> cars) {
         this.id = id;
         this.motorNumber = motorNumber;
         this.motorPower = motorPower;
@@ -46,6 +55,7 @@ public class Motor {
         this.numberOfCylinders = numberOfCylinders;
         this.cylinderType = cylinderType;
         this.fuelType = fuelType;
+        this.cars = cars;
     }
 
     public Long getId() {
@@ -110,5 +120,13 @@ public class Motor {
 
     public void setFuelType(FuelType fuelType) {
         this.fuelType = fuelType;
+    }
+
+    public Set<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(Set<Car> cars) {
+        this.cars = cars;
     }
 }

@@ -1,6 +1,10 @@
 package com.firstexample.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "FUELTYPE")
@@ -12,6 +16,10 @@ public class FuelType {
 
     @Column(name = "name")
     private String name;
+
+    @JsonManagedReference(value = "fuel_mov")
+    @OneToMany(mappedBy = "fuelType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Motor> motors = new HashSet<Motor>();
 
     public FuelType() {
     }
