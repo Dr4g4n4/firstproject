@@ -36,10 +36,6 @@ public class MotorType {
     @Column(name = "cylinder_type")
     private CylinderType cylinderType;
 
-    @JsonManagedReference(value = "car_mov")
-    @OneToMany(mappedBy = "motor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Car> cars = new HashSet<Car>();
-
     @JsonBackReference(value = "fuel_mov")
     @ManyToOne(fetch = FetchType.EAGER)
     private FuelType fuelType;
@@ -51,14 +47,13 @@ public class MotorType {
     public MotorType() {
     }
 
-    public MotorType(Long id, int motorPower, int hPower, int volume, int numberOfCylinders, CylinderType cylinderType, Set<Car> cars, FuelType fuelType, Set<Motor> motors) {
+    public MotorType(Long id, int motorPower, int hPower, int volume, int numberOfCylinders, CylinderType cylinderType, FuelType fuelType, Set<Motor> motors) {
         this.id = id;
         this.motorPower = motorPower;
         this.hPower = hPower;
         this.volume = volume;
         this.numberOfCylinders = numberOfCylinders;
         this.cylinderType = cylinderType;
-        this.cars = cars;
         this.fuelType = fuelType;
         this.motors = motors;
     }
