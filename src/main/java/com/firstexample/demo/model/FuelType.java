@@ -23,29 +23,14 @@ public class FuelType {
 
     @JsonManagedReference(value = "fuel_mov")
     @OneToMany(mappedBy = "fuelType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Motor> motors = new HashSet<Motor>();
+    private Set<MotorType> motors = new HashSet<MotorType>();
 
     public FuelType() {
     }
 
-    public FuelType(Long id, String name) {
+    public FuelType(Long id, String name, Set<MotorType> motors) {
         this.id = id;
         this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        this.motors = motors;
     }
 }

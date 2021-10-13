@@ -19,7 +19,7 @@ public class Car {
 
     @JsonBackReference(value = "chassis_mov")
     @ManyToOne(fetch = FetchType.EAGER)
-    private CarChassis carChassis;
+    private ChassisGeneral chassisGeneral;
 
     @JsonBackReference(value = "car_mov")
     @ManyToOne(fetch = FetchType.EAGER)
@@ -43,9 +43,9 @@ public class Car {
     public Car() {
     }
 
-    public Car(Long id, CarChassis carChassis, Motor motor, String brand, String model, Date productionDate, Date firstRegistration, Double mileage) {
+    public Car(Long id, ChassisGeneral chassisGeneral, Motor motor, String brand, String model, Date productionDate, Date firstRegistration, Double mileage) {
         this.id = id;
-        this.carChassis = carChassis;
+        this.chassisGeneral = chassisGeneral;
         this.motor = motor;
         this.brand = brand;
         this.model = model;
@@ -53,5 +53,4 @@ public class Car {
         this.firstRegistration = firstRegistration;
         this.mileage = mileage;
     }
-
 }

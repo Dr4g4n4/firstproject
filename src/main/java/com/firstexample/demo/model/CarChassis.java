@@ -40,14 +40,19 @@ public class CarChassis {
     @Enumerated(EnumType.STRING)
     private Color color;
 
-    @JsonManagedReference(value = "chassis_mov")
+   /* @JsonManagedReference(value = "chassis_mov")
     @OneToMany(mappedBy = "carChassis", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Car> cars = new HashSet<Car>();
+*/
+
+    @JsonManagedReference(value = "general_mov")
+    @OneToMany(mappedBy = "chassis", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<ChassisGeneral> chassisGeneral = new HashSet<ChassisGeneral>();
 
     public CarChassis() {
     }
 
-    public CarChassis(Long id, ChasissType chasissType, int length, int width, int height, int volume, Color color, Set<Car> cars) {
+    public CarChassis(Long id, ChasissType chasissType, int length, int width, int height, int volume, Color color, Set<ChassisGeneral> chassisGeneral) {
         this.id = id;
         this.chasissType = chasissType;
         this.length = length;
@@ -55,7 +60,6 @@ public class CarChassis {
         this.height = height;
         this.volume = volume;
         this.color = color;
-        this.cars = cars;
+        this.chassisGeneral = chassisGeneral;
     }
-
 }
