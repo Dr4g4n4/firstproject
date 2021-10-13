@@ -44,7 +44,7 @@ public class Motor {
     private Set<Car> cars = new HashSet<Car>();
 
     @JsonBackReference(value = "fuel_mov")
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     private FuelType fuelType;
 
     public Motor() {

@@ -18,11 +18,11 @@ public class Car {
     private Long id;
 
     @JsonBackReference(value = "chassis_mov")
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     private CarChassis carChassis;
 
     @JsonBackReference(value = "car_mov")
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Motor motor;
 
     @Column(name= "brand")
