@@ -3,12 +3,15 @@ package com.firstexample.demo.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.firstexample.demo.model.enumeration.ChasissType;
 import com.firstexample.demo.model.enumeration.Color;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-
+@Getter
+@Setter
 @Entity
 @Table(name = "CARCHASSIS")
 public class CarChassis {
@@ -55,67 +58,4 @@ public class CarChassis {
         this.cars = cars;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public ChasissType getChasissType() {
-        return chasissType;
-    }
-
-    public void setChasissType(ChasissType chasissType) {
-        this.chasissType = chasissType;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public int getVolume() {
-        return volume;
-    }
-
-    public void setVolume(int volume) {
-        this.volume = volume;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    public Set<Car> getCars() {
-        return cars;
-    }
-
-    public void setCars(Set<Car> cars) {
-        this.cars = cars;
-    }
 }
