@@ -3,6 +3,7 @@ package com.firstexample.demo.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.firstexample.demo.model.enumeration.CylinderType;
+import com.firstexample.demo.model.enumeration.Fuel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +15,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "MOTOR_TYPE")
-public class MotorType {
+public class EngineType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,25 +37,25 @@ public class MotorType {
     @Column(name = "cylinder_type")
     private CylinderType cylinderType;
 
-    @JsonBackReference(value = "fuel_mov")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private FuelType fuelType;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "primary_fuel")
+    private Fuel primaryFuel;
 
-    @JsonManagedReference(value = "motor_mov")
-    @OneToMany(mappedBy = "motorType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Motor>motors = new HashSet<Motor>();
+    @Enumerated(EnumType.STRING)
+    @Column(name = "secondary_fuel")
+    private Fuel secondaryFuel;
 
-    public MotorType() {
+    public EngineType() {
     }
 
-    public MotorType(Long id, int motorPower, int hPower, int volume, int numberOfCylinders, CylinderType cylinderType, FuelType fuelType, Set<Motor> motors) {
+    public EngineType(Long id, int motorPower, int hPower, int volume, int numberOfCylinders, CylinderType cylinderType, Fuel primaryFuel, Fuel secondaryFuel) {
         this.id = id;
         this.motorPower = motorPower;
         this.hPower = hPower;
         this.volume = volume;
         this.numberOfCylinders = numberOfCylinders;
         this.cylinderType = cylinderType;
-        this.fuelType = fuelType;
-        this.motors = motors;
+        this.primaryFuel = primaryFuel;
+        this.secondaryFuel = secondaryFuel;
     }
 }

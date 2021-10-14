@@ -1,6 +1,8 @@
 package com.firstexample.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.firstexample.demo.model.enumeration.ChasissType;
+import com.firstexample.demo.model.enumeration.Fuel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,13 +19,19 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "engine_number")
+    private String engineNumber;
+
+    @JsonBackReference(value = "engine_mov")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private EngineType engineType;
+
+    @Column(name = "chassis_serial_number")
+    private String chassisSerialNumber;
+
     @JsonBackReference(value = "chassis_mov")
     @ManyToOne(fetch = FetchType.EAGER)
-    private ChassisGeneral chassisGeneral;
-
-    @JsonBackReference(value = "car_mov")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Motor motor;
+    private CarChassis chassis;
 
     @Column(name= "brand")
     private String brand;
@@ -43,10 +51,12 @@ public class Car {
     public Car() {
     }
 
-    public Car(Long id, ChassisGeneral chassisGeneral, Motor motor, String brand, String model, Date productionDate, Date firstRegistration, Double mileage) {
+    public Car(Long id, String engineNumber, EngineType engineType, String chassisSerialNumber, CarChassis chassis, String brand, String model, Date productionDate, Date firstRegistration, Double mileage) {
         this.id = id;
-        this.chassisGeneral = chassisGeneral;
-        this.motor = motor;
+        this.engineNumber = engineNumber;
+        this.engineType = engineType;
+        this.chassisSerialNumber = chassisSerialNumber;
+        this.chassis = chassis;
         this.brand = brand;
         this.model = model;
         this.productionDate = productionDate;
