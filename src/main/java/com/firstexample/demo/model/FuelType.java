@@ -21,10 +21,6 @@ public class FuelType {
     @Column(name = "name")
     private String name;
 
-    @JsonManagedReference(value = "fuel_mov")
-    @OneToMany(mappedBy = "fuelType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<MotorType> motors = new HashSet<MotorType>();
-
     public FuelType() {
     }
 
@@ -32,6 +28,5 @@ public class FuelType {
         this.id = id;
         this.name = name;
     }
-
 
 }
