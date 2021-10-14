@@ -49,8 +49,12 @@ public class FuelTypeController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable Long id){
-        fuelTypeService.deleteOne(id);
+    public ResponseEntity<String> delete(@PathVariable Long id){
+        if(fuelTypeService.deleteOne(id)){
+            return new ResponseEntity<String>("Succesfully deleted", HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("Id invalid",HttpStatus.FORBIDDEN);
+        }
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
