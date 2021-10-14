@@ -21,11 +21,16 @@ public class Motor {
     @ManyToOne(fetch = FetchType.EAGER)
     private MotorType motorType;
 
+    @JsonBackReference(value = "fuel_mov")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private FuelType fuelType;
+
     public Motor() {
     }
 
-    public Motor(String motorNumber, MotorType motorType) {
+    public Motor(String motorNumber, MotorType motorType, FuelType fuelType) {
         this.motorNumber = motorNumber;
         this.motorType = motorType;
+        this.fuelType = fuelType;
     }
 }

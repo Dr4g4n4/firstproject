@@ -28,9 +28,10 @@ public class FuelType {
     public FuelType() {
     }
 
-    public FuelType(Long id, String name, Set<MotorType> motors) {
+    public FuelType(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.motors = motors;
     }
+
+
 }
