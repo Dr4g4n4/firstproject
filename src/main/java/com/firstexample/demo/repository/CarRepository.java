@@ -34,7 +34,32 @@ public interface CarRepository extends JpaRepository<Car, Long> {
     @Query("SELECT c FROM Car c WHERE c.productionDate > :fromdate AND c.productionDate< :todate")
     Collection<Car> findCarByProductionDateBT(@Param("fromdate") Date fromdate,@Param("todate") Date todate);
 
-    @Query("SELECT c FROM Car c join EngineType e on (c.engineType.id= e.id) where e.primaryFuel > :fuel")
+    @Query("SELECT c FROM Car c join EngineType e on (c.engineType.id= e.id) where e.primaryFuel = :fuel")
     Collection<Car> findCarByFuel(@Param("fuel") String fuel);
+
+    @Query("SELECT c FROM Car c join EngineType e on (c.engineType.id= e.id) where e.volume = :volume")
+    Collection<Car> findCarByMotorVolume(@Param("volume") int volume);
+
+    @Query("SELECT c FROM Car c join EngineType e on (c.engineType.id= e.id) where e.motorPower > :mp")
+    Collection<Car> findCarByMotorPowerGT(@Param("mp") int mp);
+
+    @Query("SELECT c FROM Car c join EngineType e on (c.engineType.id= e.id) where e.hPower > :hp")
+    Collection<Car> findCarByHorsePowerGT(@Param("hp") int hp);
+
+    @Query("SELECT c FROM Car c join EngineType e on (c.engineType.id= e.id) where e.motorPower < :mp")
+    Collection<Car> findCarByMotorPowerLT(@Param("mp") int mp);
+
+    @Query("SELECT c FROM Car c join EngineType e on (c.engineType.id= e.id) where e.hPower < :hp")
+    Collection<Car> findCarByHorsePowerLT(@Param("hp") int hp);
+
+    @Query("SELECT c FROM Car c join EngineType e on (c.engineType.id= e.id) where e.motorPower > :frommp and e.motorPower<:tomp")
+    Collection<Car> findCarByMotorPowerBT(@Param("frommp") int frommp,@Param("tomp") int tomp);
+
+    @Query("SELECT c FROM Car c join EngineType e on (c.engineType.id= e.id) where e.hPower > :hp and e.motorPower<:tohp")
+    Collection<Car> findCarByHorsePowerBT(@Param("fromhp") int fromhp,@Param("tohp") int tohp);
+
+
+    @Query("SELECT c FROM Car c join CarChassis cc on (c.chassis.id= cc.id) where cc.color = :color")
+    Collection<Car> findCarByColor(@Param("color") String color);
 
 }

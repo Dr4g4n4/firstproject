@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 
 @Controller
 public class SearchController {
@@ -54,20 +55,98 @@ public class SearchController {
     @GetMapping("/byGreaterMileage")
     @ResponseBody
     public Collection<Car> getByMileageGT(@RequestParam Integer mileage) {
-        return carservice.findCarByMileageGT(mileage);
+        return carservice.getCarByMileageGT(mileage);
     }
     @GetMapping("/byLowerMileage")
     @ResponseBody
     public Collection<Car> getByMileageLT(@RequestParam Integer mileage) {
-        return carservice.findCarByMileageLT(mileage);
+        return carservice.getCarByMileageLT(mileage);
     }
 
     @GetMapping("/byMileageRange")
     @ResponseBody
     public Collection<Car> getByMileageLT(@RequestParam Integer frommileage,@RequestParam Integer tomileage) {
-        return carservice.findCarByMileageBT(frommileage,tomileage);
+        return carservice.getCarByMileageBT(frommileage,tomileage);
     }
 
+    @GetMapping("/byGreaterProductionDate")
+    @ResponseBody
+    public Collection<Car> getByProductionDateGT(@RequestParam Date date){
+        return carservice.getCarByProductionDateGT(date);
+    }
+
+    @GetMapping("/byLowerProductionDate")
+    @ResponseBody
+    public Collection<Car> getCarProductionDateLT(@RequestParam Date date){
+        return carservice.getCarByProductionDateLT(date);
+    }
+
+    @GetMapping("/byProductionDateRange")
+    @ResponseBody
+    public Collection<Car> getCarByProductionDateBT(@RequestParam Date fromdate,@RequestParam Date todate){
+        return carservice.getCarByProductionDateBT(fromdate, todate);
+    }
+
+    @GetMapping("/byFuelType")
+    @ResponseBody
+    public Collection<Car> getCarByFuel(@RequestParam String fuel){
+
+        return carservice.getCarByFuel(fuel);
+    }
+
+    @GetMapping("/byMotorVolume")
+    @ResponseBody
+    public Collection<Car> getCarByMotorVolume(@RequestParam int volume){
+
+        return  carservice.getCarByMotorVolume(volume);
+    }
+
+    @GetMapping("/byGreaterMotorPower")
+    @ResponseBody
+    public Collection<Car> getCarByMotorPowerGT(@RequestParam int mp){
+
+        return carservice.getCarByMotorPowerGT(mp);
+    }
+
+    @GetMapping("/byGreaterHorsePower")
+    @ResponseBody
+    public Collection<Car> getCarByHorsePowerGT(@RequestParam int hp){
+
+        return carservice.getCarByHorsePowerGT(hp);
+    }
+
+    @GetMapping("/byLowerMotorPower")
+    @ResponseBody
+    public Collection<Car> getCarByMotorMotorPowerLT(@RequestParam int mp){
+
+        return  carservice.getCarByMotorPowerLT(mp);
+    }
+
+    @GetMapping("/byLowerHorsePower")
+    @ResponseBody
+    public Collection<Car> getCarByHorsePowerLT(@RequestParam int hp){
+
+        return carservice.getCarByHorsePowerLT(hp);
+    }
+
+    @GetMapping("/byMotorPowerRange")
+    @ResponseBody
+    public Collection<Car> getCarByMotorPowerBT(@RequestParam int frommp,@RequestParam int tomp){
+        return carservice.getCarByMotorPowerBT(frommp,tomp);
+    }
+
+    @GetMapping("/byHosePowerRange")
+    @ResponseBody
+    public Collection<Car> getCarByHorsePowerBT(@RequestParam int fromhp,@RequestParam int tohp){
+        return carservice.getCarByHorsePowerBT(fromhp,tohp);
+    }
+
+    @GetMapping("/byColor")
+    @ResponseBody
+    public Collection<Car> getCarByColor(@RequestParam String color){
+
+        return carservice.getCarByColor(color);
+    }
 
 
 
