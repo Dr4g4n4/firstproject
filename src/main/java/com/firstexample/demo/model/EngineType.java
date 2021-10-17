@@ -14,7 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "MOTOR_TYPE")
+@Table(name = "ENGINE_TYPE")
 public class EngineType {
 
     @Id
