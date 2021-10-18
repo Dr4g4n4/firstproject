@@ -45,6 +45,10 @@ public class EngineType {
     @Column(name = "secondary_fuel")
     private Fuel secondaryFuel;
 
+    @JsonManagedReference(value = "engine_mov")
+    @OneToMany(mappedBy = "engineType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Car> cars = new HashSet<Car>();
+
     public EngineType() {
     }
 
