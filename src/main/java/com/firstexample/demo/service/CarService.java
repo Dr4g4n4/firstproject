@@ -4,6 +4,9 @@ import com.firstexample.demo.datavalidation.RegularExpressions;
 import com.firstexample.demo.model.Car;
 import com.firstexample.demo.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -70,6 +73,10 @@ public class CarService {
     }
 
     //TODO getCarByParameters
+    public List<Car> getCarsByParameters(Specification<Car> spec) {
+        return carRepository.findAll(spec);
+    }
+
 
 
 }

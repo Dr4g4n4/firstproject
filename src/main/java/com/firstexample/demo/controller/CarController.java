@@ -2,7 +2,11 @@ package com.firstexample.demo.controller;
 
 import com.firstexample.demo.model.Car;
 import com.firstexample.demo.service.CarService;
+import net.kaczmarzyk.spring.data.jpa.domain.*;
+import net.kaczmarzyk.spring.data.jpa.web.annotation.And;
+import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +21,7 @@ public class CarController {
     @Autowired
     private CarService carService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Car>> getCars() {
         List<Car> cars= carService.getAllCars();
         if(cars != null){
@@ -63,6 +67,25 @@ public class CarController {
             return new ResponseEntity<Car>(ret, HttpStatus.OK);
         }else{
             return new ResponseEntity<Car>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Car>> getCarsByParameters(
+            @And({
+                    @Spec(path = "engine_number", params = "engine_number", spec = LikeIgnoreCase.class),
+                    @Spec(path = "chassisSerialNumber", params = "chassisSerialNumber", spec = LikeIgnoreCase.class),
+                    @Spec(path = "brand", params = "brand", spec = In.class),
+                    @Spec(path = "model", params = "model", spec = In.class),
+                    @Spec(path = "productionDate", params = {"productionDateAfter", "productionDateBefore"}, spec = Between.class),
+                    @Spec(path = "firstRegistration", params = {"firstRegistrationAfter", "firstRegistrationBefore"}, spec = Between.class),
+                    @Spec(path = "mileage", params = {"mileageGreaterThan", "mileageLessThan"}, spec = Between.class)
+            }) Specification<Car> spec) {
+        List<Car> cars = carService.getCarsByParameters(spec);
+        if(cars != null){
+            return new ResponseEntity<List<Car>>(cars, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
 
