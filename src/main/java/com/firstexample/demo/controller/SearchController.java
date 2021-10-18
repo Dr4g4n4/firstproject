@@ -44,12 +44,12 @@ public class SearchController {
     @ResponseBody
     public  List<Map<String,Object>> getByModel(@RequestParam String model) {
 
-        return sayHello(carservice.getCarByModel(model));
+        return formResponse(carservice.getCarByModel(model));
     }
     @GetMapping("/byBrand")
     @ResponseBody
-    public Collection<Car> getByBrand(@RequestParam String brand) {
-        return carservice.getCarsByBrand(brand);
+    public List<Map<String,Object>> getByBrand(@RequestParam String brand) {
+        return formResponse(carservice.getCarsByBrand(brand));
     }
 
     @GetMapping("/byGreaterMileage")
@@ -149,7 +149,7 @@ public class SearchController {
     }
 
 
-    private  List<Map<String,Object>> sayHello(Collection<Car> cars)
+    private  List<Map<String,Object>> formResponse(Collection<Car> cars)
     {
         //Get data from service layer into entityList.
 
@@ -158,7 +158,22 @@ public class SearchController {
         List<Map<String,Object>> liste= new ArrayList<Map<String,Object>>();
         for (Car c: cars) {
             Map<String, Object> map = new HashMap<String, Object>();
-            map.put("motor",c.getEngineType().getMotorPower());
+            map.put("brand",c.getBrand());
+            map.put("model",c.getModel());
+            map.put("first_registration",c.getFirstRegistration());
+            map.put("mileage",c.getMileage());
+            map.put("production_date",c.getProductionDate());
+            map.put("horse_power",c.getEngineType().getHPower());
+            map.put("motor_power",c.getEngineType().getMotorPower());
+            map.put("motor_cylinderType",c.getEngineType().getCylinderType());
+            map.put("primary_Fuel",c.getEngineType().getPrimaryFuel());
+            map.put("secondary_Fuel",c.getEngineType().getSecondaryFuel());
+            map.put("color",c.getChassis().getColor());
+            map.put("height",c.getChassis().getHeight());
+            map.put("width",c.getChassis().getWidth());
+            map.put("length",c.getChassis().getLength());
+            map.put("volume",c.getChassis().getVolume());
+
             liste.add(map);
         }
 
