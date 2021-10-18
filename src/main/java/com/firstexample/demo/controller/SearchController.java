@@ -6,14 +6,14 @@ import com.firstexample.demo.model.Car;
 import com.firstexample.demo.repository.CarRepository;
 import com.firstexample.demo.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 
 @Controller
 public class SearchController {
@@ -42,9 +42,9 @@ public class SearchController {
   //  }
     @GetMapping("/byModel")
     @ResponseBody
-    public Collection<Car> getByModel(@RequestParam String model) {
+    public  List<Map<String,Object>> getByModel(@RequestParam String model) {
 
-        return carservice.getCarByModel(model);
+        return sayHello(carservice.getCarByModel(model));
     }
     @GetMapping("/byBrand")
     @ResponseBody
@@ -147,6 +147,25 @@ public class SearchController {
 
         return carservice.getCarByColor(color);
     }
+
+
+    private  List<Map<String,Object>> sayHello(Collection<Car> cars)
+    {
+        //Get data from service layer into entityList.
+
+
+       // Map<String, Object> map = new HashMap<String, Object>(); // use new HashMap<String, Object>(); for single result
+        List<Map<String,Object>> liste= new ArrayList<Map<String,Object>>();
+        for (Car c: cars) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("motor",c.getEngineType().getMotorPower());
+            liste.add(map);
+        }
+
+        return liste;
+      //  return new ResponseEntity<Object>(entities, HttpStatus.OK);
+    }
+
 
 
 

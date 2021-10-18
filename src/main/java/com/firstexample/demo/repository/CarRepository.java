@@ -52,10 +52,10 @@ public interface CarRepository extends JpaRepository<Car, Long> {
     @Query("SELECT c FROM Car c join EngineType e on (c.engineType.id= e.id) where e.hPower < :hp")
     Collection<Car> findCarByHorsePowerLT(@Param("hp") int hp);
 
-    @Query("SELECT c FROM Car c join EngineType e on (c.engineType.id= e.id) where e.motorPower > :frommp and e.motorPower<:tomp")
+    @Query("SELECT c FROM Car c join EngineType e on (c.engineType.id= e.id) where e.motorPower > :frommp and e.motorPower< :tomp")
     Collection<Car> findCarByMotorPowerBT(@Param("frommp") int frommp,@Param("tomp") int tomp);
 
-    @Query("SELECT c FROM Car c join EngineType e on (c.engineType.id= e.id) where e.hPower > :hp and e.motorPower<:tohp")
+    @Query("SELECT c FROM Car c join EngineType e on (c.engineType.id= e.id) where e.hPower > :fromhp and e.motorPower< :tohp")
     Collection<Car> findCarByHorsePowerBT(@Param("fromhp") int fromhp,@Param("tohp") int tohp);
 
 
