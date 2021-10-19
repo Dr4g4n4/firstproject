@@ -46,4 +46,19 @@ public class RegularExpressions {
         return m.matches();
     }
 
+    public boolean isValidFuel(String fuel){
+        String nameRegex = "(?i)(petrol|diesel|methane|ethane|elektro|hybrid|bananas)";
+        Pattern p = Pattern.compile(nameRegex);
+        if (fuel == null) {
+            return false;
+        }
+        Matcher m = p.matcher(fuel);
+        if(m.matches()){
+            System.out.println("VALIDNO");
+        }else{
+            System.out.println("NIJE VALIDNO");
+        }
+        return m.matches();
+    }
+
 }
