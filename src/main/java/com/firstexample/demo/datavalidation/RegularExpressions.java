@@ -20,7 +20,7 @@ public class RegularExpressions {
 
     public boolean isValidMileage(Double a){
         String number = Double.toString(a);
-        String nameRegex = "[0-9]*\\\\.[0-9]+|[0-9]+";
+        String nameRegex = "^[1-9]\\d*(\\.\\d+)?$";
         Pattern pattern = Pattern.compile(nameRegex);
         Matcher matcher = pattern.matcher(number);
         if(matcher.find()){
