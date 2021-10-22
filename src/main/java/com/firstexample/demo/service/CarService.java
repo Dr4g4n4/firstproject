@@ -72,11 +72,8 @@ public class CarService {
         }
     }
 
-    //TODO getCarByParameters
     public List<Car> getCarsByParameters(Specification<Car> spec) {
         return carRepository.findAll(spec);
     }
-
-
 
 }

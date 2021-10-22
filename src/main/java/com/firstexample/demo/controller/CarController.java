@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/car")
-public class CarController {
+public class  CarController {
 
     @Autowired
     private CarService carService;
@@ -42,7 +42,7 @@ public class CarController {
     }
 
     @PostMapping()
-    public ResponseEntity<Car> createCar(@RequestBody Car car){
+    public ResponseEntity<Car> createCar(@RequestBody Car car,@RequestParam Long idChassis, @RequestParam Long idEngine){
         Car ret = carService.saveCar(car);
         if(ret != null){
             return new ResponseEntity<Car>(ret, HttpStatus.OK);
@@ -73,13 +73,16 @@ public class CarController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Car>> getCarsByParameters(
             @And({
-                    @Spec(path = "engine_number", params = "engine_number", spec = LikeIgnoreCase.class),
-                    @Spec(path = "chassisSerialNumber", params = "chassisSerialNumber", spec = LikeIgnoreCase.class),
+                    @Spec(path = "engine_number", params = "engine_number", spec = Equal.class),
+                    @Spec(path = "chassisSerialNumber", params = "chassisSerialNumber", spec = Equal.class),
                     @Spec(path = "brand", params = "brand", spec = In.class),
                     @Spec(path = "model", params = "model", spec = In.class),
-                    @Spec(path = "productionDate", params = {"productionDateAfter", "productionDateBefore"}, spec = Between.class),
-                    @Spec(path = "firstRegistration", params = {"firstRegistrationAfter", "firstRegistrationBefore"}, spec = Between.class),
-                    @Spec(path = "mileage", params = {"mileageGreaterThan", "mileageLessThan"}, spec = Between.class)
+                    @Spec(path = "productionDate", params = "productionDateAfter", spec = GreaterThanOrEqual.class),
+                    @Spec(path = "productionDate", params = "productionDateBefore", spec = LessThanOrEqual.class),
+                    @Spec(path = "firstRegistration", params = "firstRegistrationBefore", spec = LessThanOrEqual.class),
+                    @Spec(path = "firstRegistration", params = "firstRegistrationAfter", spec = GreaterThanOrEqual.class),
+                    @Spec(path = "mileage", params = "mileageGreater", spec = GreaterThanOrEqual.class),
+                    @Spec(path = "mileage", params = "mileageLess", spec = LessThanOrEqual.class),
             }) Specification<Car> spec) {
         List<Car> cars = carService.getCarsByParameters(spec);
         if(cars != null){
