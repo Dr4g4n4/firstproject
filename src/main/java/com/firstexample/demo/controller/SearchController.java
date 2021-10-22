@@ -61,24 +61,48 @@ public class SearchController {
 
     @GetMapping("/byGreaterMileage")
     @ResponseBody
-    public List<Map<String,Object>> getByMileageGT(@RequestParam Integer mileage) {
-        return formResponse(carservice.getCarByMileageGT(mileage));
+    public List<Map<String,Object>> getByMileageGT(@RequestParam(required = false) String mileage) {
+        if(mileage==null){
+            return formResponseError("You need to add Queryparam mileage");
+        }
+        try {
+            return formResponse(carservice.getCarByMileageGT(Integer.parseInt(mileage)));
+        }catch (Exception e){
+            return formResponseError("Please use integer values");
+        }
     }
     @GetMapping("/byLowerMileage")
     @ResponseBody
-    public List<Map<String,Object>> getByMileageLT(@RequestParam Integer mileage) {
-        return formResponse(carservice.getCarByMileageLT(mileage));
+    public List<Map<String,Object>> getByMileageLT(@RequestParam(required = false) String mileage) {
+        if(mileage==null){
+            return formResponseError("You need to add Queryparam mileage");
+        }
+        try {
+            return formResponse(carservice.getCarByMileageLT(Integer.parseInt(mileage)));
+        }catch (Exception e){
+            return formResponseError("Please use integer values");
+        }
+
     }
 
     @GetMapping("/byMileageRange")
     @ResponseBody
-    public List<Map<String,Object>> getByMileageLT(@RequestParam Integer frommileage,@RequestParam Integer tomileage) {
-        return formResponse(carservice.getCarByMileageBT(frommileage,tomileage));
+    public List<Map<String,Object>> getByMileageLT(@RequestParam(required = false) String frommileage,@RequestParam(required = false) String tomileage) {
+        if(frommileage==null || tomileage==null){
+            return formResponseError("You need to add Queryparams frommileage and tomileage");
+        }
+        try {
+            return formResponse(carservice.getCarByMotorPowerBT(Integer.parseInt(frommileage),Integer.parseInt(tomileage)));
+        }
+        catch (Exception pe){
+            return formResponseError("Please use integer values");
+        }
+
     }
 
     @GetMapping("/byGreaterProductionDate")
     @ResponseBody
-    public List<Map<String,Object>> getByProductionDateGT(@RequestParam String date)  {
+    public List<Map<String,Object>> getByProductionDateGT(@RequestParam(required = false) String date)  {
         try {
             Date date_c=new SimpleDateFormat("dd/MM/yyyy").parse(date);
             return formResponse(carservice.getCarByProductionDateGT(date_c));
@@ -91,20 +115,41 @@ public class SearchController {
 
     @GetMapping("/byLowerProductionDate")
     @ResponseBody
-    public List<Map<String,Object>> getCarProductionDateLT(@RequestParam Date date){
-        return formResponse(carservice.getCarByProductionDateLT(date));
+    public List<Map<String,Object>> getCarProductionDateLT(@RequestParam(required = false) String date){
+        if(date==null){
+            return formResponseError("You need to add Queryparam date");
+        }
+        try {
+            Date date_c=new SimpleDateFormat("dd/MM/yyyy").parse(date);
+            return formResponse(carservice.getCarByProductionDateGT(date_c));
+        }
+        catch (ParseException pe){
+            return formResponseError("Invalid date type");
+        }
     }
 
     @GetMapping("/byProductionDateRange")
     @ResponseBody
-    public List<Map<String,Object>> getCarByProductionDateBT(@RequestParam Date fromdate,@RequestParam Date todate){
-        return formResponse(carservice.getCarByProductionDateBT(fromdate, todate));
+    public List<Map<String,Object>> getCarByProductionDateBT(@RequestParam(required = false) String fromdate,@RequestParam(required = false) String todate){
+        if(fromdate==null || todate==null ){
+            return formResponseError("You need to add Queryparams fromdate and todate");
+        }
+        try {
+            Date date_s=new SimpleDateFormat("dd/MM/yyyy").parse(fromdate);
+            Date date_e=new SimpleDateFormat("dd/MM/yyyy").parse(todate);
+            return formResponse(carservice.getCarByProductionDateBT(date_s,date_e));
+        }
+        catch (ParseException pe){
+            return formResponseError("Invalid date type (dd/MM/yyyy");
+        }
     }
 
     @GetMapping("/byFuelType")
     @ResponseBody
-    public List<Map<String,Object>> getCarByFuel(@RequestParam String fuel){
-
+    public List<Map<String,Object>> getCarByFuel(@RequestParam(required = false) String fuel){
+        if(fuel==null){
+            return formResponseError("You need to add Queryparam volume");
+        }
         return formResponse(carservice.getCarByFuel(fuel));
     }
 
@@ -126,49 +171,109 @@ public class SearchController {
 
     @GetMapping("/byGreaterMotorPower")
     @ResponseBody
-    public List<Map<String,Object>> getCarByMotorPowerGT(@RequestParam int mp){
-
-        return formResponse(carservice.getCarByMotorPowerGT(mp));
+    public List<Map<String,Object>> getCarByMotorPowerGT(@RequestParam(required = false) String mp){
+        if(mp==null){
+            return formResponseError("You need to add Queryparam mp");
+        }
+        try {
+            return formResponse(carservice.getCarByMotorPowerGT(Integer.parseInt(mp)));
+        }
+        catch (Exception pe){
+            return formResponseError("Please use integer values");
+        }
     }
 
     @GetMapping("/byGreaterHorsePower")
     @ResponseBody
-    public List<Map<String,Object>> getCarByHorsePowerGT(@RequestParam int hp){
+    public List<Map<String,Object>> getCarByHorsePowerGT(@RequestParam(required = false) String hp){
+        if(hp==null){
+            return formResponseError("You need to add Queryparam hp");
+        }
+        try {
+            return formResponse(carservice.getCarByHorsePowerGT(Integer.parseInt(hp)));
+        }
+        catch (Exception pe){
+            return formResponseError("Please use integer values");
+        }
 
-        return formResponse(carservice.getCarByHorsePowerGT(hp));
     }
 
     @GetMapping("/byLowerMotorPower")
     @ResponseBody
-    public List<Map<String,Object>> getCarByMotorMotorPowerLT(@RequestParam int mp){
+    public List<Map<String,Object>> getCarByMotorMotorPowerLT(@RequestParam(required = false) String mp){
+        if(mp==null){
+            return formResponseError("You need to add Queryparam mp");
+        }
+        try {
+            return formResponse(carservice.getCarByMotorPowerLT(Integer.parseInt(mp)));
+        }
+        catch (Exception pe){
+            return formResponseError("Please use integer values");
+        }
 
-        return formResponse(carservice.getCarByMotorPowerLT(mp));
+
     }
 
     @GetMapping("/byLowerHorsePower")
     @ResponseBody
-    public List<Map<String,Object>> getCarByHorsePowerLT(@RequestParam int hp){
+    public List<Map<String,Object>> getCarByHorsePowerLT(@RequestParam(required = false) String hp){
+        if(hp==null){
+            return formResponseError("You need to add Queryparam hp");
+        }
+        try {
+            return formResponse(carservice.getCarByHorsePowerLT(Integer.parseInt(hp)));
+        }
+        catch (Exception pe){
+            return formResponseError("Please use integer values");
+        }
 
-        return formResponse(carservice.getCarByHorsePowerLT(hp));
+
     }
 
     @GetMapping("/byMotorPowerRange")
     @ResponseBody
-    public List<Map<String,Object>> getCarByMotorPowerBT(@RequestParam int frommp,@RequestParam int tomp){
-        return formResponse(carservice.getCarByMotorPowerBT(frommp,tomp));
+    public List<Map<String,Object>> getCarByMotorPowerBT(@RequestParam(required = false) String frommp,@RequestParam String tomp){
+        if(frommp==null || tomp==null){
+            return formResponseError("You need to add Queryparams frommp and tomp");
+        }
+        try {
+            return formResponse(carservice.getCarByMotorPowerBT(Integer.parseInt(frommp),Integer.parseInt(tomp)));
+        }
+        catch (Exception pe){
+            return formResponseError("Please use integer values");
+        }
+
     }
 
     @GetMapping("/byHosePowerRange")
     @ResponseBody
-    public List<Map<String,Object>> getCarByHorsePowerBT(@RequestParam int fromhp,@RequestParam int tohp){
-        return formResponse(carservice.getCarByHorsePowerBT(fromhp,tohp));
+    public List<Map<String,Object>> getCarByHorsePowerBT(@RequestParam(required = false) String fromhp,@RequestParam(required = false) String tohp){
+        if(fromhp==null || tohp==null){
+            return formResponseError("You need to add Queryparams fromhp and tohp");
+        }
+        try {
+            return formResponse(carservice.getCarByHorsePowerBT(Integer.parseInt(fromhp),Integer.parseInt(tohp)));
+        }
+        catch (Exception pe){
+            return formResponseError("Please use integer values");
+        }
+
     }
 
     @GetMapping("/byColor")
     @ResponseBody
-    public List<Map<String,Object>> getCarByColor(@RequestParam String color){
+    public List<Map<String,Object>> getCarByColor(@RequestParam(required = false) String color){
+        if(color==null){
+            return formResponseError("You need to add Queryparam color");
+        }
+        try {
 
-        return formResponse(carservice.getCarByColor(color));
+            return  formResponse(carservice.getCarByColor(color));
+        }
+        catch (Exception e){
+            return formResponseError("Please use String values");
+        }
+
     }
 
 
