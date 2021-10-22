@@ -14,7 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "MOTOR_TYPE")
+@Table(name = "ENGINE_TYPE")
 public class EngineType {
 
     @Id
@@ -45,10 +45,14 @@ public class EngineType {
     @Column(name = "secondary_fuel")
     private Fuel secondaryFuel;
 
+    @JsonManagedReference(value = "engine_mov")
+    @OneToMany(mappedBy = "engineType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Car> cars = new HashSet<Car>();
+
     public EngineType() {
     }
 
-    public EngineType(Long id, int motorPower, int hPower, int volume, int numberOfCylinders, CylinderType cylinderType, Fuel primaryFuel, Fuel secondaryFuel) {
+    public EngineType(Long id, int motorPower, int hPower, int volume, int numberOfCylinders, CylinderType cylinderType, Fuel primaryFuel, Fuel secondaryFuel, Set<Car> cars) {
         this.id = id;
         this.motorPower = motorPower;
         this.hPower = hPower;
@@ -57,5 +61,6 @@ public class EngineType {
         this.cylinderType = cylinderType;
         this.primaryFuel = primaryFuel;
         this.secondaryFuel = secondaryFuel;
+        this.cars = cars;
     }
 }

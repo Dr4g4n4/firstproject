@@ -1,10 +1,3 @@
-INSERT INTO fueltype(name) VALUES ('benzin');
-INSERT INTO fueltype(name) VALUES ('dizel');
-INSERT INTO fueltype(name) VALUES ('metan');
-INSERT INTO fueltype(name) VALUES ('etan');
-INSERT INTO fueltype(name) VALUES ('elektricno');
-INSERT INTO fueltype(name) VALUES ('hybrid');
-
 INSERT INTO engine_type(cylinder_type, h_power, motor_power, number_of_cylinders, primary_fuel, secondary_fuel, volume) VALUES ('V', 205, 6000, 4, 'DIESEL', 'DIESEL', 300);
 INSERT INTO engine_type(cylinder_type, h_power, motor_power, number_of_cylinders, primary_fuel, secondary_fuel, volume) VALUES ('I', 220, 5000, 3, 'DIESEL', 'PETROL', 150);
 INSERT INTO engine_type(cylinder_type, h_power, motor_power, number_of_cylinders, primary_fuel, secondary_fuel, volume) VALUES ('I', 180, 2300, 3, 'PETROL', 'DIESEL', 250);
