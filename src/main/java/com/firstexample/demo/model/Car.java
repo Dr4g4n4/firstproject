@@ -1,8 +1,6 @@
 package com.firstexample.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.firstexample.demo.model.enumeration.ChasissType;
-import com.firstexample.demo.model.enumeration.Fuel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +10,18 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name= "CAR")
+@Table(name= "CAR", indexes = {
+        @Index(name = "idx_engine_number", columnList = "engine_number"),
+        @Index(name = "idx_engine_type", columnList = "engine_type_id"),
+        @Index(name = "idx_chassis_number", columnList = "chassis_serial_number"),
+        @Index(name = "idx_brand", columnList = "brand"),
+        @Index(name = "idx_model", columnList = "model"),
+        @Index(name = "idx_chassis", columnList = "chassis_id"),
+        @Index(name = "idx_mileage", columnList = "mileage"),
+        @Index(name = "idx_productiondate", columnList = "production_date"),
+        // @Index(name = "idx_mileagebrand", columnList = "mileage, brand"),
+        // @Index(name = "idx_brand_model", columnList = "brand, model")
+})
 public class Car {
 
     @Id

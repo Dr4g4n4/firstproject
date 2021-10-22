@@ -13,7 +13,9 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "CARCHASSIS")
+@Table(name = "CARCHASSIS",  indexes = {
+        @Index(name = "idx_color", columnList = "color")
+})
 public class CarChassis {
 
     @Id

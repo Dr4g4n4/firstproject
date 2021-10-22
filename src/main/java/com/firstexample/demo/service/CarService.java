@@ -83,28 +83,28 @@ public class CarService {
     }
 
     public Collection<Car> getCarsByBrand(String brand){
-        return carrepository.findCarByBrand(brand);
+        return carRepository.findCarByBrand(brand);
     }
 
 
     public Collection<Car> getCarByModel( String brand){
-        return carrepository.findCarByModel(brand);
+        return carRepository.findCarByModel(brand);
     }
 
 
 
     public Collection<Car> getCarByMileageGT(int mileage){
-        return carrepository.findCarByMileageGT(mileage);
+        return carRepository.findCarByMileageGT(mileage);
     }
 
 
     public Collection<Car> getCarByMileageLT(int mileage){
-        return carrepository.findCarByMileageLT(mileage);
+        return carRepository.findCarByMileageLT(mileage);
     }
 
 
     public Collection<Car> getCarByMileageBT(int fromMileage, int toMileage){
-        return carrepository.findCarByMileageBT(fromMileage,toMileage);
+        return carRepository.findCarByMileageBT(fromMileage,toMileage);
     }
 
 
@@ -112,65 +112,65 @@ public class CarService {
 
 
     public Collection<Car> getCarByProductionDateGT(Date date){
-        return carrepository.findCarByProductionDateGT(date);
+        return carRepository.findCarByProductionDateGT(date);
     }
 
 
     public Collection<Car> getCarByProductionDateLT( Date date){
-        return carrepository.findCarByProductionDateLT(date);
+        return carRepository.findCarByProductionDateLT(date);
     }
 
 
     public Collection<Car> getCarByProductionDateBT(Date fromdate,Date todate){
-        return carrepository.findCarByProductionDateBT(fromdate, todate);
+        return carRepository.findCarByProductionDateBT(fromdate, todate);
     }
 
 
     public Collection<Car> getCarByFuel( String fuel){
 
-        return carrepository.findCarByFuel(fuel);
+        return carRepository.findCarByFuel(fuel);
     }
 
 
     public Collection<Car> getCarByMotorVolume(int volume){
 
-        return  carrepository.findCarByMotorVolume(volume);
+        return  carRepository.findCarByMotorVolume(volume);
     }
 
     public Collection<Car> getCarByMotorPowerGT(int mp){
 
-        return carrepository.findCarByMotorPowerGT(mp);
+        return carRepository.findCarByMotorPowerGT(mp);
     }
 
     public Collection<Car> getCarByHorsePowerGT( int hp){
 
-        return carrepository.findCarByHorsePowerGT(hp);
+        return carRepository.findCarByHorsePowerGT(hp);
     }
 
     public Collection<Car> getCarByMotorPowerLT(int mp){
 
-        return  carrepository.findCarByMotorPowerLT(mp);
+        return  carRepository.findCarByMotorPowerLT(mp);
     }
 
 
     public Collection<Car> getCarByHorsePowerLT(int hp){
 
-        return carrepository.findCarByHorsePowerLT(hp);
+        return carRepository.findCarByHorsePowerLT(hp);
     }
 
      public Collection<Car> getCarByMotorPowerBT(int frommp, int tomp){
-        return carrepository.findCarByMotorPowerBT(frommp,tomp);
+        return carRepository.findCarByMotorPowerBT(frommp,tomp);
     }
 
 
     public Collection<Car> getCarByHorsePowerBT(int fromhp, int tohp){
-        return carrepository.findCarByHorsePowerBT(fromhp,tohp);
+        return carRepository.findCarByHorsePowerBT(fromhp,tohp);
     }
 
 
     public Collection<Car> getCarByColor( String color){
 
-        return carrepository.findCarByColor(color);
+        return carRepository.findCarByColor(color);
     }
 
 }

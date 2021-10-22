@@ -1,6 +1,5 @@
 package com.firstexample.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.firstexample.demo.model.enumeration.CylinderType;
 import com.firstexample.demo.model.enumeration.Fuel;
@@ -14,7 +13,12 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "ENGINE_TYPE")
+@Table(name = "ENGINE_TYPE",  indexes = {
+        @Index(name = "idx_volume", columnList = "volume"),
+        @Index(name = "idx_motorpower", columnList = "motor_power"),
+        @Index(name = "idx_hpower", columnList = "h_power"),
+        @Index(name = "idx_fuel", columnList = "primary_fuel")
+})
 public class EngineType {
 
     @Id
