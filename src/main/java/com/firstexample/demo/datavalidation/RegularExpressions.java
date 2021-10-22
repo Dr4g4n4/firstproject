@@ -46,4 +46,21 @@ public class RegularExpressions {
         return m.matches();
     }
 
+    public boolean isValidColor(String color){
+        String nameRegex = "(?i)(white|blue|black|pink|orange|green|gray|brown|red)";
+        Pattern p = Pattern.compile(nameRegex);
+        if (color == null) {
+            return false;
+        }
+        Matcher m = p.matcher(color);
+        if(m.matches()){
+            System.out.println("VALIDNO");
+        }else{
+            System.out.println("NIJE VALIDNO");
+        }
+        return m.matches();
+    }
+
+    
+
 }
