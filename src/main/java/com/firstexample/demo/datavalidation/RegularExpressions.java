@@ -46,13 +46,14 @@ public class RegularExpressions {
         return m.matches();
     }
 
-    public boolean isValidColor(String color){
-        String nameRegex = "(?i)(white|blue|black|pink|orange|green|gray|brown|red)";
+
+    public boolean isValidFuel(String fuel){
+        String nameRegex = "(?i)(petrol|diesel|methane|ethane|elektro|hybrid|bananas)";
         Pattern p = Pattern.compile(nameRegex);
-        if (color == null) {
+        if (fuel == null) {
             return false;
         }
-        Matcher m = p.matcher(color);
+        Matcher m = p.matcher(fuel);
         if(m.matches()){
             System.out.println("VALIDNO");
         }else{
@@ -60,7 +61,21 @@ public class RegularExpressions {
         }
         return m.matches();
     }
+  
+    public boolean isValidColor(String color){
+        String nameRegex = "(?i)(white|blue|black|pink|orange|green|gray|brown|red)";
+        Pattern p = Pattern.compile(nameRegex);
+        if (color == null) {
+            return false;
+        }
+        Matcher m = p.matcher(color);
 
-    
+        if(m.matches()){
+            System.out.println("VALIDNO");
+        }else{
+            System.out.println("NIJE VALIDNO");
+        }
+        return m.matches();
+    }
 
 }
