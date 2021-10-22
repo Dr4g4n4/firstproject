@@ -2,8 +2,13 @@ package com.firstexample.demo.service;
 
 
 import com.firstexample.demo.datavalidation.RegularExpressions;
+import com.firstexample.demo.dto.CarDTO;
 import com.firstexample.demo.model.Car;
+import com.firstexample.demo.model.CarChassis;
+import com.firstexample.demo.model.EngineType;
+import com.firstexample.demo.repository.CarChassisRepository;
 import com.firstexample.demo.repository.CarRepository;
+import com.firstexample.demo.repository.EngineTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
@@ -23,6 +28,12 @@ public class CarService {
     @Autowired
     private CarRepository carRepository;
 
+    @Autowired
+    private CarChassisRepository carChassisRepository;
+
+    @Autowired
+    private EngineTypeRepository engineTypeRepository;
+
     public Car getCarById(Long id){
         RegularExpressions regularExpressions = new RegularExpressions();
         if(regularExpressions.isIdValid(id)){
@@ -40,7 +51,10 @@ public class CarService {
         return carRepository.findAll();
     }
 
-    public Car saveCar(Car car){
+    public Car saveCar(CarDTO carDTO){
+        Car car = new Car(carDTO.getEngineNumber(),carDTO.getChassisSerialNumber(),carDTO.getBrand(),carDTO.getModel(),carDTO.getProductionDate(),carDTO.getFirstRegistration(),carDTO.getMileage());
+        car.setChassis(carChassisRepository.getCarChassisById(carDTO.getChassisId()));
+        car.setEngineType(engineTypeRepository.getEngineTypeById(carDTO.getEngineTypeId()));
         return carRepository.save(car);
     }
 

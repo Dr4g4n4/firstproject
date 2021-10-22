@@ -1,5 +1,6 @@
 package com.firstexample.demo.controller;
 
+import com.firstexample.demo.dto.CarDTO;
 import com.firstexample.demo.model.Car;
 import com.firstexample.demo.service.CarService;
 import net.kaczmarzyk.spring.data.jpa.domain.*;
@@ -42,7 +43,7 @@ public class  CarController {
     }
 
     @PostMapping()
-    public ResponseEntity<Car> createCar(@RequestBody Car car,@RequestParam Long idChassis, @RequestParam Long idEngine){
+    public ResponseEntity<Car> createCar(@RequestBody CarDTO car){
         Car ret = carService.saveCar(car);
         if(ret != null){
             return new ResponseEntity<Car>(ret, HttpStatus.OK);

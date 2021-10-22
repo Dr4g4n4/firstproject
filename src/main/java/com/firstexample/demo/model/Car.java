@@ -72,4 +72,15 @@ public class Car {
         this.firstRegistration = firstRegistration;
         this.mileage = mileage;
     }
+
+    public Car(String engineNumber, String chassisSerialNumber, String brand, String model, Date productionDate, Date firstRegistration, Double mileage) {
+        this.engineNumber = engineNumber;
+        this.chassisSerialNumber = chassisSerialNumber;
+        this.brand = brand;
+        this.model = model;
+        this.productionDate = productionDate;
+        this.firstRegistration = firstRegistration;
+        this.mileage = mileage;
+    }
+
 }
