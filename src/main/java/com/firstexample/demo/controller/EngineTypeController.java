@@ -38,8 +38,8 @@ public class EngineTypeController {
     }
 
     @PostMapping()
-    public ResponseEntity<EngineType> createEngineType (@RequestBody EngineType EngineType){
-        EngineType ret = engineTypeService.saveEngineType(EngineType);
+    public ResponseEntity<EngineType> createEngineType (@RequestBody EngineType engineType){
+        EngineType ret = engineTypeService.saveEngineType(engineType);
         if(ret != null){
             return new ResponseEntity<EngineType>(ret, HttpStatus.OK);
         }else{

@@ -8,11 +8,23 @@ services:
       - "8080:8080"
     depends_on:
       - postgresqldb
+    networks:
+      carNET:
   postgresqldb:
     image: postgres
-    ports:
-      - "5432:5432"
+  #  ports:
+  #    - "5432:5432"
     environment:
       - POSTGRES_PASSWORD=123
       - POSTGRES_USER=postgres
       - POSTGRES_DB=firstproject
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      carNET:
+
+
+volumes:
+    dbdata:
+networks:
+    carNET:
