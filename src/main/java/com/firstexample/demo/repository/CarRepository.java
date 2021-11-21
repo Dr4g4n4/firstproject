@@ -67,5 +67,20 @@ public interface CarRepository extends JpaRepository<Car, Long>, JpaSpecificatio
 
     @Query("SELECT c FROM Car c join CarChassis cc on (c.chassis.id= cc.id) where cc.color = :color")
     Collection<Car> findCarByColor(@Param("color") String color);
-  
+
+    @Query(value = "SELECT c FROM Car c WHERE c.brand = :brand and c.model= :model and c.productionDate >= :startDate and c.productionDate <= :endDate")
+    Collection<Car> findCarByBrandModelYear(@Param("brand") String brand,@Param("model") String model,@Param("startDate") Date startDate,@Param("endDate") Date endDate );
+
+    @Query(value = "SELECT c FROM Car c WHERE c.brand = :brand and c.model= :model and c.productionDate >= :startDate and c.productionDate <= :endDate")
+    Collection<Car> findCarByModelandYear(@Param("model") String model,@Param("startDate") Date startDate,@Param("endDate") Date endDate );
+
+    @Query(value = "SELECT c FROM Car c WHERE c.brand = :brand and c.model= :model and c.productionDate >= :startDate and c.productionDate <= :endDate")
+    Collection<Car> findCarByBrandandYear(@Param("brand") String brand,@Param("startDate") Date startDate,@Param("endDate") Date endDate );
+
+    @Query(value = "SELECT c FROM Car c WHERE c.brand = :brand and c.model= :model ")
+    Collection<Car> findCarByBrandandModel(@Param("brand") String brand,@Param("model") String model );
+
+    @Query(value = "SELECT c FROM Car c WHERE c.productionDate >= :startDate and c.productionDate <= :endDate")
+    Collection<Car> findCarByYear(@Param("startDate") Date startDate,@Param("endDate") Date endDate );
+
 }

@@ -17,6 +17,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -186,6 +189,107 @@ public class CarService {
 
         return carRepository.findCarByColor(color);
     }
+    public Collection<Car> get_on_multiple_params(String brand, String model,Integer year){
+        int combination=0;
+        if(brand!=null)combination+=1;
+        if(model!=null)combination+=2;
+        if(year!=null)combination+=4;
+        switch (combination){
+            case 0:
+                return null;
+            case 1:
+                return getCarsByBrand(brand);
+            case 2:
+                return getCarByModel(model);
+            case 3:
+                return getCarByBrandandModel(brand,model);
+            case 4:
+                return getCarByYear(year);
+            case 5:
+                return getCarByBrandandYear(brand,year);
+            case 6:
+                return getCarByModelandYear(model,year);
+            case 7:
+                return getCarByBrandModelandYear(brand,model,year);
+        }
+        return null;
+    }
+    public Collection<Car> getCarByBrandModelandYear(String brand, String model, int year ) {
+        String start_date_string = "01-01-"+year;
+        String end_date_string = "31-12-"+year;
+        //Instantiating the SimpleDateFormat class
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        //Parsing the given String to Date object
+
+        try {
+            Date startDate = formatter.parse(start_date_string);
+            Date endDate = formatter.parse(end_date_string);
+            return carRepository.findCarByBrandModelYear(brand,model,startDate,endDate);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+       return null;
+    }
+    public Collection<Car> getCarByModelandYear( String model, int year ){
+        String start_date_string = "01-01-"+year;
+        String end_date_string = "31-12-"+year;
+        //Instantiating the SimpleDateFormat class
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        //Parsing the given String to Date object
+
+        try {
+            Date startDate = formatter.parse(start_date_string);
+            Date endDate = formatter.parse(end_date_string);
+            return carRepository.findCarByModelandYear(model,startDate,endDate);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public Collection<Car> getCarByBrandandYear(String brand,  int year ){
+        String start_date_string = "01-01-"+year;
+        String end_date_string = "31-12-"+year;
+        //Instantiating the SimpleDateFormat class
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        //Parsing the given String to Date object
+
+        try {
+            Date startDate = formatter.parse(start_date_string);
+            Date endDate = formatter.parse(end_date_string);
+            return carRepository.findCarByBrandandYear(brand,startDate,endDate);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+    public Collection<Car> getCarByBrandandModel(String brand, String model ){
+        return carRepository.findCarByBrandandModel(brand,model);
+    }
+    public Collection<Car> getCarByYear( int year ){
+        String start_date_string = "01-01-"+year;
+        String end_date_string = "31-12-"+year;
+        //Instantiating the SimpleDateFormat class
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        //Parsing the given String to Date object
+
+        try {
+            Date startDate = formatter.parse(start_date_string);
+            Date endDate = formatter.parse(end_date_string);
+            return carRepository.findCarByYear(startDate,endDate);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+
 
 }
 
