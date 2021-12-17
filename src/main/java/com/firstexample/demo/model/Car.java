@@ -83,4 +83,20 @@ public class Car {
         this.mileage = mileage;
     }
 
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", engineNumber='" + engineNumber + '\'' +
+                ", engineType=" + engineType +
+                ", chassisSerialNumber='" + chassisSerialNumber + '\'' +
+                ", chassis=" + chassis +
+                ", brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", productionDate=" + productionDate +
+                ", firstRegistration=" + firstRegistration +
+                ", mileage=" + mileage +
+                '}';
+    }
 }

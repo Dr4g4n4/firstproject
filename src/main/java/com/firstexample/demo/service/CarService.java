@@ -9,6 +9,8 @@ import com.firstexample.demo.model.EngineType;
 import com.firstexample.demo.repository.CarChassisRepository;
 import com.firstexample.demo.repository.CarRepository;
 import com.firstexample.demo.repository.EngineTypeRepository;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
@@ -289,7 +291,54 @@ public class CarService {
 
 
 
+    public Car create_Car_From_Json_Car_for_you(JSONObject json)  {
+        Car car=new Car();
 
+
+
+        try {
+            car.setBrand(json.getString("make"));
+        }catch (Exception e){
+            car.setBrand(null);
+        }
+        try {
+            car.setModel(json.getString("model"));
+        }catch (Exception e){
+            car.setModel(null);
+        }
+        try {
+            car.setMileage((double)(json.getInt("mileage")));
+        }catch (Exception e){
+            car.setMileage((double)(-1));
+        }
+
+
+        return car;
+    }
+    public Car create_Car_From_Json_Auto_Dev(JSONObject json)  {
+        Car car=new Car();
+
+
+
+        try {
+            car.setBrand(json.getString("make"));
+        }catch (Exception e){
+            car.setBrand(null);
+        }
+        try {
+            car.setModel(json.getString("model"));
+        }catch (Exception e){
+            car.setModel(null);
+        }
+        try {
+            car.setMileage((double)(json.getInt("mileage")));
+        }catch (Exception e){
+            car.setMileage((double)(-1));
+        }
+
+
+        return car;
+    }
 
 }
 

@@ -59,4 +59,17 @@ public class CarChassis {
         this.color = color;
         this.cars = cars;
     }
+
+    @Override
+    public String toString() {
+        return "CarChassis{" +
+                "id=" + id +
+                ", chasissType=" + chasissType +
+                ", length=" + length +
+                ", width=" + width +
+                ", height=" + height +
+                ", volume=" + volume +
+                ", color=" + color +
+                '}';
+    }
 }

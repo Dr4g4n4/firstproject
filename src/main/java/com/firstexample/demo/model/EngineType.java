@@ -67,4 +67,19 @@ public class EngineType {
         this.secondaryFuel = secondaryFuel;
         this.cars = cars;
     }
+
+
+    @Override
+    public String toString() {
+        return "EngineType{" +
+                "id=" + id +
+                ", motorPower=" + motorPower +
+                ", hPower=" + hPower +
+                ", volume=" + volume +
+                ", numberOfCylinders=" + numberOfCylinders +
+                ", cylinderType=" + cylinderType +
+                ", primaryFuel=" + primaryFuel +
+                ", secondaryFuel=" + secondaryFuel +
+                '}';
+    }
 }
